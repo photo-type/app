@@ -79,7 +79,7 @@ class LoginScreen extends Component {
                 {
                   !loading && 
                   <Text style={styles.loginButtonText}>
-                    LOGIN IN
+                    LOGIN
                   </Text>
                 }
               </TouchableOpacity>

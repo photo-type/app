@@ -51,7 +51,7 @@ export default class App {
       case 'after-login':
       Navigation.startSingleScreenApp({
         screen: {
-          screen: 'App.LoginScreen'
+          screen: 'App.ListScreen'
         }
       });
       store.dispatch(appInitialized());
