@@ -21,7 +21,7 @@ export const checkAuthState = () => async (dispatch, getState) => {
   }
 };
 
-export const login = (username, password) => (dispatch, getState) => {
+export const login = (email, password) => (dispatch, getState) => {
   return dispatch({
     [CALL_API]: {
       method: 'POST',
@@ -30,7 +30,7 @@ export const login = (username, password) => (dispatch, getState) => {
         'NO-AUTH': true
       },
       body: JSON.stringify({
-        username, password
+        email, password
       }),
       types: [
         types.LOGIN_REQUEST,
