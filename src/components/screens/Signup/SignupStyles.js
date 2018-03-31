@@ -13,6 +13,8 @@ var styles = StyleSheet.create({
   },
   heading: {
     flex: 1,
+    marginTop: 50,
+    marginBottom: 30,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -27,15 +29,17 @@ var styles = StyleSheet.create({
     alignItems: 'center'
   },
   fieldsHeight: {
-    height: 480
+    height: 450
   },
   fields: {
-    height: 404,
+    minHeight: 404,
     paddingLeft: 25,
     paddingRight: 25,
     backgroundColor: 'white',
     width: 300,
-    borderRadius: 10
+    borderRadius: 10,
+    paddingBottom: 80,
+    marginBottom: 80
   },
   fieldsHeading: {
     fontSize: 16,
@@ -76,21 +80,12 @@ var styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 50,
+    bottom: 30,
   },
   forgotPasswordText: {
     textAlign: 'center',
     color: '#2B3857',
     opacity: 0.6,
-  },
-  forgotPasswordText1: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    textAlign: 'center',
-    color: '#2B3857',
-    opacity: 0.5,
-    bottom: 25,
   },
   mgBt: {
     marginBottom: 30,
@@ -101,14 +96,6 @@ var styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: 'red',
     color: 'red',
-    marginBottom: 10,
-  },
-  successBox: {
-    padding: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: '#2D2E3A',
-    color: '#2D2E3A',
     marginBottom: 10,
   }
 });

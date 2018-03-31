@@ -18,9 +18,6 @@ class LoginScreen extends Component {
     password: ''
   };
 
-  componentWillMount() {
-  }
-
   loginUser = () => {
     const { password, username } = this.state;
     const {loading} = this.props;
@@ -30,31 +27,39 @@ class LoginScreen extends Component {
   };
 
   render() {
-    const { loading, error, errorMessage } = this.props;
+    const { loading, error, errorMessage, registerUserSuccess } = this.props;
     const { password, username } = this.state;
 
     return (
       <View style={styles.parentContainer}>
         <View style={styles.heading}><Text style={styles.headingText}>Phototype</Text></View>
         <View style={styles.fieldsWrapper}>
-          <View style={[styles.fields, error ? styles.fieldsHeight : null]}>
+          <View style={[styles.fields, (error || registerUserSuccess) ? styles.fieldsHeight : null]}>
             <Text style={styles.fieldsHeading}>Please log in with your {'\n'}Phototype account</Text> 
             {
               error &&
               <Text style={styles.errorBox}>{errorMessage}</Text>
+            }
+            {
+              registerUserSuccess &&
+              <Text style={styles.successBox}>
+                Your account was created successfully, Please login to continue.
+              </Text>
             }
             <View>
               <TextField
                 style={styles.mgBt}
                 fontSize={16}
                 labelFontSize={16}
+                autoCapitalize="none"
+                autoCorrect={false}
                 error={username && username.length < 3 ? "Please input correct username." : "" }
                 baseColor="#D5D7DD"
                 tintColor="#50C3C7"
                 titleTextStyle={{fontFamily: 'AvenirNext-Regular'}}
                 labelTextStyle={{fontFamily: 'AvenirNext-DemiBold', color: '#50C3C7'}}
                 textColor="#2B3857"
-                label='Username'
+                label='E-mail'
                 value={username}
                 onChangeText={ (username) => this.setState({username }) }
               />
@@ -63,6 +68,8 @@ class LoginScreen extends Component {
                 labelFontSize={16}
                 tintColor="#50C3C7"
                 baseColor="#D5D7DD"
+                autoCapitalize="none"
+                autoCorrect={false}
                 secureTextEntry={true}
                 titleTextStyle={{fontFamily: 'AvenirNext-Regular'}}
                 labelTextStyle={{fontFamily: 'AvenirNext-DemiBold', color: '#50C3C7'}}
@@ -84,7 +91,15 @@ class LoginScreen extends Component {
                 }
               </TouchableOpacity>
             </View>       
-            <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+            <TouchableOpacity
+              style={styles.forgotPasswordContainer}
+              onPress={() => {
+                this.props.navigator.push({screen: 'App.SignupScreen'})
+              }}
+            >
+              <Text style={styles.forgotPasswordText}>Dont have an account?</Text>
+            </TouchableOpacity>
+            <Text style={styles.forgotPasswordText1}>Forgot your password?</Text>
           </View>
         </View>
         <View style={styles.logoWrap}>

@@ -14,6 +14,7 @@ export const checkAuthState = () => async (dispatch, getState) => {
     });
     dispatch(loadAppScreen());
   } else {
+    console.log('here');
     dispatch(loadLoginScreen());
     dispatch({
       type: types.NOT_LOGGED_IN
@@ -80,13 +81,9 @@ export const registerUser = (userObj) => (dispatch, getState) => {
       method: 'POST',
       endpoint: `/auth/signup`,
       headers: {
-        'No-Auth': true
+        'NO-AUTH': true
       },
-      body: JSON.stringify({
-        type: 'CUSTOMER',
-        phone_number: getState().auth.phone,
-        ...userObj
-      }),
+      body: JSON.stringify(userObj),
       types: [
         types.REGISTER_USER_REQUEST,
         types.REGISTER_USER_SUCCESS,
