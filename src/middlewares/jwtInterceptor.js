@@ -13,7 +13,6 @@ const startOver = () => {
 };
 
 export default ({ getState }) => next => action => {
-  console.log(action, )
   const callApi = action[CALL_API];
   // Check if this action is a redux-api-middleware action.
   if (callApi) {
