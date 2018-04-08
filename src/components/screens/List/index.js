@@ -6,19 +6,24 @@ import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from
 class ListScreen extends Component {
   static navigatorStyle = {
     backButtonTitle: '',
-    screenBackgroundColor: '#2D2E3A',
   };
 
   state = {
   };
 
-  componentWillMount() {
-  }
-
   render() {
     return (
       <View style={styles.parentContainer}>
         <Text>under development</Text>
+        <TouchableOpacity
+          onPress={() => this.props.navigator.push({
+            screen: 'App.CreateScreen',
+            title: 'Create Prototype',
+            backButtonTitle: ''
+          })}
+        >
+          <Text>Create prototype</Text>
+        </TouchableOpacity>
       </View>
     );
   }
