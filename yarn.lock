@@ -392,6 +392,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@remobile/react-native-toast@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@remobile/react-native-toast/-/react-native-toast-1.0.7.tgz#b2e3684cdb13e1c9d9b4ed08e667157d4ad0fab2"
+
 abab@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -4171,7 +4175,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -4238,6 +4242,10 @@ react-is@^16.3.0-alpha.3:
   version "16.3.0-alpha.3"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.0-alpha.3.tgz#0960d927b2b17154897139c6329aa958e29a86c2"
 
+react-native-background-upload@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-background-upload/-/react-native-background-upload-4.4.0.tgz#a23454fc33feeefb3bfe370f0dba175c87065a09"
+
 react-native-camera-kit@^5.3.30:
   version "5.3.30"
   resolved "https://registry.yarnpkg.com/react-native-camera-kit/-/react-native-camera-kit-5.3.30.tgz#4f64ed4206fd03e4a9246b750022aa587b9bf71e"
@@ -4253,6 +4261,10 @@ react-native-camera-kit@^5.3.30:
     rx "^4.0.6"
     transducers.js "^0.3.2"
 
+react-native-image-resizer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-image-resizer/-/react-native-image-resizer-1.0.0.tgz#d47e14943c37938e287fbd639e4db7ceb7fd8917"
+
 react-native-material-textfield@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/react-native-material-textfield/-/react-native-material-textfield-0.12.0.tgz#3fba19d76ab89f67052c81e082152fc243d82a3f"
@@ -4264,6 +4276,10 @@ react-native-navigation@^1.1.425:
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.425.tgz#c35ce6695d9f7b74d47bb30050f6e91727988343"
   dependencies:
     lodash "4.x.x"
+
+"react-native-prompt@github:hamxabaig/react-native-prompt#master":
+  version "1.0.0"
+  resolved "https://codeload.github.com/hamxabaig/react-native-prompt/tar.gz/332124888bc3ff32ed2bb94f688dc5fcb797a08e"
 
 react-native-vector-icons@^4.6.0:
   version "4.6.0"

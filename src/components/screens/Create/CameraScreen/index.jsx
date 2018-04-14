@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {CameraKitCamera} from 'react-native-camera-kit';
 import styles from './CameraStyles';
 import CameraAction from './CameraAction';
+import Toast from '@remobile/react-native-toast';
+import ImageResizer from 'react-native-image-resizer';
 import ActionButton from '../ActionButton';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
@@ -30,9 +32,13 @@ class CreateScreen extends Component {
   takePhoto = async () => {
     try {
       const image = await this.camera.capture(true);
-      this.props.addImage(image);
+      const compressedImage = await ImageResizer.createResizedImage(image.uri, image.width, image.height, 'JPEG', 80);
+      console.log(compressedImage);
+      this.props.addImage(compressedImage);
     } catch (e) {
       //TODO: show toast message
+      console.log(e);
+      Toast.showLongTop('Error while compressing image');
     }
   };
 

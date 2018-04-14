@@ -3,6 +3,10 @@ package com.phototype;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import fr.bamlab.rnimageresizer.ImageResizerPackage;
+import com.reactnativenavigation.NavigationReactPackage;
+import com.remobile.toast.RCTToastPackage;
+import com.vydia.RNUploader.UploaderReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.wix.RNCameraKit.RNCameraKitPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +29,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ImageResizerPackage(),
+            new NavigationReactPackage(),
+            new RCTToastPackage(),
+            new UploaderReactPackage(),
             new VectorIconsPackage(),
             new RNCameraKitPackage()
       );

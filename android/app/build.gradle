@@ -137,6 +137,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-resizer')
+    compile project(':react-native-navigation')
+    compile project(':@remobile/react-native-toast')
+    compile project(':react-native-background-upload')
     compile project(':react-native-vector-icons')
     compile project(':react-native-camera-kit')
     compile fileTree(dir: "libs", include: ["*.jar"])

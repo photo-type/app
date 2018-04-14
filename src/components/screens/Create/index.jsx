@@ -8,7 +8,7 @@ import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from
 
 class CreateScreen extends Component {
   static navigatorStyle = {
-    backButtonTitle: '',
+    backButtonTitle: 'Back',
     screenBackgroundColor: '#F3F8FE',
     navBarTextColor: '#2B3857',
     navBarButtonColor: '#2B3857'
@@ -91,7 +91,11 @@ class CreateScreen extends Component {
         </ScrollView>
         {
           images.length > 1 &&
-          <ActionButton label="UPLOAD" handleTap={console.log} />
+          <ActionButton
+            label="UPLOAD" handleTap={() => this.props.navigator.push({
+            screen: 'App.CreateScreen.Upload',
+            })}
+          />
         }
       </View>
     );
