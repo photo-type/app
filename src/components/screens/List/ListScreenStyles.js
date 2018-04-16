@@ -9,88 +9,69 @@ var styles = StyleSheet.create({
   },
   parentContainer: {
     flex: 1,
-    flexDirection: 'column'
+    // flexDirection: 'column'
   },
-  heading: {
+  row: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    flexDirection: 'row',
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginTop: 20
   },
-  headingText: {
-    fontSize: 32,
-    color: 'white',
-    letterSpacing: 0.55
-  },
-  fieldsWrapper: {
-    flex: 3,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  fieldsHeight: {
-    height: 450
-  },
-  fields: {
-    height: 404,
-    paddingLeft: 25,
-    paddingRight: 25,
-    backgroundColor: 'white',
-    width: 300,
-    borderRadius: 10
-  },
-  fieldsHeading: {
-    fontSize: 16,
-    width: '100%',
-    textAlign: 'center',
-    color: '#2B3857',
-    marginTop: 40,
-    marginBottom: 20
-  },
-  logoWrap: {
-    flex: 1,
-    justifyContent: 'center',
+  col: {
+    width: '50%',
     alignItems: 'center',
   },
-  poweredByText: {
-    left: 49,
-    top: 9,
-    fontSize: 16,
-    color: 'white',
-    letterSpacing: 0.36,
-  },
-  loginButton: {
-    elevation: 20,
-    marginTop: 25,
-    backgroundColor: '#2D2E3A',
-    width: 234,
-    justifyContent: 'center',
+  colWrap: {
+    height: 200,
+    width: 150,
     alignItems: 'center',
-    height: 50,
-    borderRadius: 50,
+    justifyContent: 'center',
+    overflow: 'hidden'
   },
-  loginButtonText: {
-    fontSize: 18,
-    color: 'white',
-    letterSpacing: 0.5
+  addIconWrap: {
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.2)',
+    borderRadius: 5,
   },
-  forgotPasswordText: {
+  image: {
+    height: '100%',
+    borderRadius: 5,
+    width: '100%'
+  },
+  imageOverlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    borderRadius: 5,
     position: 'absolute',
     left: 0,
     right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  overlayText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
     textAlign: 'center',
-    color: '#2B3857',
-    opacity: 0.4,
-    bottom: 30,
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowRadius: 1,
+    textShadowOffset: {
+      width: 1,
+      height: 1
+    },
+    marginBottom: 5
   },
-  mgBt: {
-    marginBottom: 30,
-  },
-  errorBox: {
-    padding: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: 'red',
-    color: 'red',
-    marginBottom: 10,
+  screensCountText: {
+    color: 'white',
+    fontSize: 12,
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowRadius: 1,
+    textShadowOffset: {
+      width: 1,
+      height: 1
+    },
   }
 });
 
