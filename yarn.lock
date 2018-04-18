@@ -4242,6 +4242,9 @@ react-is@^16.3.0-alpha.3:
   version "16.3.0-alpha.3"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.0-alpha.3.tgz#0960d927b2b17154897139c6329aa958e29a86c2"
 
+react-native-actionsheet@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-actionsheet/-/react-native-actionsheet-2.4.1.tgz#e886bc7b13bb60eac2e85be5e59ea09e1a4fa683"
 react-native-background-upload@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/react-native-background-upload/-/react-native-background-upload-4.4.0.tgz#a23454fc33feeefb3bfe370f0dba175c87065a09"

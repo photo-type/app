@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './CreateStyles';
 import ActionButton from './ActionButton';
 import {removeImage} from '../../../reducers/create/create.actions';
+import {BUCKET_URL} from '../../../reducers';
 import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
 
 class CreateScreen extends Component {
@@ -75,7 +76,10 @@ class CreateScreen extends Component {
                         {
                           !obj.addButton &&
                           <View style={styles.colWrap}>
-                            <Image style={styles.image} source={{uri: obj.uri}} />
+                            <Image
+                              style={styles.image}
+                              source={{uri: `${BUCKET_URL}${obj.screens.length ? obj.screens[0].path : ''}`}}
+                            />
                             <View style={styles.imageOverlay}>
                               <Icon name="ios-close-outline" size={100} color="rgba(255, 255, 255, 0.5)" />
                             </View>
