@@ -4,7 +4,13 @@ import Immutable from 'seamless-immutable';
 const initialState = Immutable({
   capturedImages: [],
   id: null,
+  updatingScreen: false,
   list: {
+    data: [],
+    loading: false,
+    error: false
+  },
+  screens: {
     data: [],
     loading: false,
     error: false
@@ -43,6 +49,33 @@ export default function create(state = initialState, action = {}) {
       return state.merge({list: {error: false, data: action.payload, loading: false}});
     case types.GET_PROTOTYPE_LIST_FAILURE:
       return state.merge({list: {error: true, data: [], loading: false}});
+
+    case types.GET_SCREENS_REQUEST:
+      return state.merge({screens: {...state.screens, loading: true}});
+    case types.GET_SCREENS_SUCCESS:
+      return state.merge({screens: {error: false, data: action.payload.screen, loading: false}});
+    case types.GET_SCREENS_FAILURE:
+      return state.merge({screens: {error: true, data: [], loading: false}});
+
+    case types.UPDATE_SCREEN_ACTIONS_REQUEST:
+      return state.merge({updatingScreen: true});
+    case types.UPDATE_SCREEN_ACTIONS_SUCCESS:
+      return state.merge({
+        updatingScreen: false,
+        screens: {
+          ...state.screens,
+          data: state.screens.data.map((screen) => {
+            if (screen._id == action.payload.id) {
+              return screen.merge({
+                actions: action.payload.actions
+              })
+            }
+            return screen;
+          })
+        }
+      });
+    case types.UPDATE_SCREEN_ACTIONS_FAILURE:
+      return state.merge({updatingScreen: false});
     default:
       return state;
   }
