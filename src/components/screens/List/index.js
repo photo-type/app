@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ActionSheet from 'react-native-actionsheet'
 import Prompt from 'react-native-prompt';
 import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
-import {createPrototype, listPrototypes, setCurrentPrototype} from '../../../reducers/create/create.actions';
+import {createPrototype, listPrototypes, setCurrentPrototype, } from '../../../reducers/create/create.actions';
 
 class ListScreen extends Component {
   static navigatorStyle = {
@@ -50,10 +50,22 @@ class ListScreen extends Component {
       this.handlePrototypeSelected(this.state.selectedObj);
       break;
       case 2:
+      this.playSelectedPrototype(this.state.selectedObj);
+      break;
       // play prototype
     }
   };
-
+  playSelectedPrototype =(obj)=>{
+    this.props.setCurrentPrototype(obj._id)
+    this.props.navigator.push({
+      screen: 'App.PlayScreen',
+      title: `Playing : ${obj.name}`,
+      passProps:{
+        _obj : obj
+      },
+      backButtonTitle:"End Demo"
+    })
+  }
   handlePrototypeSelected = (obj) => {
     this.props.setCurrentPrototype(obj._id);
     this.props.navigator.push({

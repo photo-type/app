@@ -6,6 +6,7 @@ import ListScreen from './List';
 import CreateScreen from './Create';
 import CreateCameraScreen from './Create/CameraScreen';
 import UploadScreen from './Create/Upload';
+import PlayScreen from './Play';
 import ReviewActionsScreen from './Create/ReviewActions';
 
 export default (store, provider) => {
@@ -13,6 +14,8 @@ export default (store, provider) => {
   Navigation.registerComponent('App.LoginScreen', () => LoginScreen, store, provider);
   Navigation.registerComponent('App.SignupScreen', () => SignupScreen, store, provider);
   Navigation.registerComponent('App.ListScreen', () => ListScreen, store, provider);
+  Navigation.registerComponent('App.PlayScreen', () => PlayScreen, store, provider);
+  
   Navigation.registerComponent('App.CreateScreen', () => CreateScreen, store, provider);
   Navigation.registerComponent('App.CreateScreen.Camera', () => (
     CreateCameraScreen
