@@ -70,7 +70,7 @@ class ListScreen extends Component {
     this.props.setCurrentPrototype(obj._id);
     this.props.navigator.push({
       screen: 'App.CreateScreen',
-      title: `${obj.name}: Add Screens`,
+      title: `${obj.name}: Screens`,
       passProps: {
         id: obj._id
       },

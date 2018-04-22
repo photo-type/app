@@ -24,6 +24,43 @@ export const setCurrentPrototype = (id) => (dispatch) => {
   })
 };
 
+export const getScreens = () => (dispatch, getState) => {
+  return dispatch({
+    [CALL_API]: {
+      method: 'GET',
+      endpoint: `/prototypes/${getState().create.id}/screens`,
+      types: [
+        types.GET_SCREENS_REQUEST,
+        types.GET_SCREENS_SUCCESS,
+        types.GET_SCREENS_FAILURE,
+      ]
+    }
+  });
+};
+
+export const updateScreen = (id, actions) => (dispatch, getState) => {
+  return dispatch({
+    [CALL_API]: {
+      method: 'PUT',
+      endpoint: `/screens/${id}`,
+      body: JSON.stringify(actions),
+      types: [
+        types.UPDATE_SCREEN_ACTIONS_REQUEST,
+        {
+          type: types.UPDATE_SCREEN_ACTIONS_SUCCESS,
+          payload: (action, state, res) => {
+            return res.json().then((json) => {
+              json.id = id;
+              return json;
+            });
+          }
+        },
+        types.UPDATE_SCREEN_ACTIONS_FAILURE,
+      ]
+    }
+  });
+};
+
 export const listPrototypes = () => (dispatch, getState) => {
   return dispatch({
     [CALL_API]: {

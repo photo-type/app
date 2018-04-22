@@ -6,6 +6,20 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  screenListContainer: {
+    flex: 1,
+    position: 'absolute',
+    backgroundColor: '#F3F8FE',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    zIndex: 202
+  },
+  scrollContainer: {
+    flex: 1, 
+    marginTop: 50
+  },
   overlayView: {
     position: 'absolute',
     backgroundColor: 'transparent',
@@ -27,6 +41,25 @@ var styles = StyleSheet.create({
     right: 15,
     borderRadius: 50
   },
+  doneButton: {
+    height: 50,
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#2D2E3A',
+    position: 'absolute',
+    zIndex: 2,
+    bottom: 15,
+    left: 15,
+    borderRadius: 50
+  },
+  loader: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    zIndex: 99,
+    backgroundColor: 'rgba(0, 0, 0, .7)'
+  },
   row: {
     flex: 1,
     flexDirection: 'row',
@@ -43,7 +76,9 @@ var styles = StyleSheet.create({
     width: 150,
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    borderRadius: 5,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)'
   },
   addIconWrap: {
     borderWidth: 1,
