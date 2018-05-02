@@ -84,7 +84,8 @@ class ListScreen extends Component {
     const prototypesList = [ {addButton: true} ,...data];
     
     const rows = prototypesList.reduce((rows, item, idx) => {
-      if(idx % 2 === 0 && idx > 0) rows.push([]);
+      if(idx % 2 === 0 && idx > 0) 
+        rows.push([]);
       rows[rows.length-1].push({i: (idx -1 ), ...item});
       return rows;
     }, [[]]);
