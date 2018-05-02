@@ -6,7 +6,7 @@ import ActionSheet from 'react-native-actionsheet'
 import Prompt from 'react-native-prompt';
 import Toast from '@remobile/react-native-toast';
 import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
-import {createPrototype, listPrototypes, setCurrentPrototype, } from '../../../reducers/create/create.actions';
+import {createPrototype, listPrototypes, setCurrentPrototype, deletePrototype } from '../../../reducers/create/create.actions';
 import {logout} from '../../../reducers/auth/auth.actions';
 
 class ListScreen extends Component {
