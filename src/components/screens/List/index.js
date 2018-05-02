@@ -6,11 +6,8 @@ import ActionSheet from 'react-native-actionsheet'
 import Prompt from 'react-native-prompt';
 import Toast from '@remobile/react-native-toast';
 import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
-import {createPrototype, listPrototypes, setCurrentPrototype, } from '../../../reducers/create/create.actions';
-<<<<<<< HEAD
-=======
+import {createPrototype, listPrototypes, setCurrentPrototype, deletePrototype } from '../../../reducers/create/create.actions';
 import {logout} from '../../../reducers/auth/auth.actions';
->>>>>>> b3e0db5a1217ebde68fc6334121fb09053749b6a
 
 class ListScreen extends Component {
   static navigatorStyle = {
@@ -62,7 +59,7 @@ class ListScreen extends Component {
   handleActionSheet = (index) => {
     switch(index) {
       case 0:
-      //delete prototype
+      this.deletePrototype(this.state.selectedObj);
       break;
       case 1:
       // prototype details
@@ -74,6 +71,18 @@ class ListScreen extends Component {
       // play prototype
     }
   };
+  deletePrototype=(obj)=>{
+    this.props.deletePrototype(obj._id).then(action=>{
+      if (!action.error) {
+        Toast.showLongTop('You just deleted a prototype');
+        this.props.listPrototypes();
+      } else {
+        Toast.showLongTop('Error while deleting Prototype, Try again.');
+      }
+    }).catch(e=>{
+      Toast.showLongTop('Error while catching delete Prototype, Try again.');
+    });
+  }
   playSelectedPrototype =(obj)=>{
     this.props.setCurrentPrototype(obj._id)
     this.props.navigator.push({
@@ -120,7 +129,7 @@ class ListScreen extends Component {
           onPress={this.handleActionSheet}
         />
         {
-          !listLoading &&
+          (!this.props.delete.loading && !listLoading) &&
           <ScrollView style={{marginBottom: data.length > 1 ? 50 : 0, flex: 1}}>
           {
             rows.map((cols, rowInd) => (
@@ -176,7 +185,7 @@ class ListScreen extends Component {
           onSubmit={this.handleCreatePrototype}
         />
         {
-          listLoading &&
+          (this.props.delete.loading || listLoading )&&
           <ActivityIndicator style={{marginTop: 50}} size="large" />
         }
       </View>
@@ -195,7 +204,8 @@ function mapActionsToProps(dispatch) {
     createPrototype: (s) => dispatch(createPrototype(s)),
     setCurrentPrototype: (s) => dispatch(setCurrentPrototype(s)),
     listPrototypes: () => dispatch(listPrototypes()),
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    deletePrototype: (s)=>dispatch(deletePrototype(s))
   };
 }
 

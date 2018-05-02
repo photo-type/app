@@ -71,6 +71,19 @@ export const listPrototypes = () => (dispatch, getState) => {
     }
   });
 };
+export const deletePrototype = (id) => (dispatch, getState) => {
+  return dispatch({
+    [CALL_API]: {
+      method: 'DELETE',
+      endpoint: `/prototypes/${id}`,
+      types: [
+        types.DELETE_PROTOTYPE_REQUEST,
+        types.DELETE_PROTOTYPE_SUCCESS,
+        types.DELETE_PROTOTYPE_FAILURE,
+      ] 
+    }
+  });
+};
 
 export const createPrototype = (name) => (dispatch, getState) => {
   return dispatch({
