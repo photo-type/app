@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {CameraKitCamera} from 'react-native-camera-kit';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { CameraKitCamera } from 'react-native-camera-kit';
 import styles from './CameraStyles';
 import CameraAction from './CameraAction';
 import Toast from '@remobile/react-native-toast';
 import ImageResizer from 'react-native-image-resizer';
 import ActionButton from '../ActionButton';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
-import {addImage, removeImage} from '../../../../reducers/create/create.actions';
+import { View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator } from 'react-native';
+import { addImage, removeImage } from '../../../../reducers/create/create.actions';
 
 class CreateScreen extends Component {
   static navigatorStyle = {
@@ -27,6 +27,11 @@ class CreateScreen extends Component {
       const isUserAuthorizedCamera = await CameraKitCamera.requestDeviceCameraAuthorization();
       console.log(isUserAuthorizedCamera);
     }
+    setTimeout(() => {
+      this.setState(prev => {
+        this.state = prev
+      })
+    }, 3000)
   }
 
   takePhoto = async () => {
@@ -51,8 +56,8 @@ class CreateScreen extends Component {
   };
 
   render() {
-    const {showPermissionError} = this.state;
-    const {capturedImages} = this.props;
+    const { showPermissionError } = this.state;
+    const { capturedImages } = this.props;
 
     return (
       <View style={styles.parentContainer}>
@@ -66,14 +71,14 @@ class CreateScreen extends Component {
                 backgroundColor: 'white'
               }}
               cameraOptions={{
-                flashMode: 'auto',             // on/off/auto(default)
+                flashMode: 'off',             // on/off/auto(default)
                 focusMode: 'on',               // off/on(default)
                 zoomMode: 'on',                // off/on(default)
                 ratioOverlayColor: '#00000077' // optional
               }}
             />
             <View style={styles.imagesWrap}>
-              <ScrollView horizontal={true}> 
+              <ScrollView horizontal={true}>
                 {
                   capturedImages.map((image, index) => (
                     <TouchableOpacity
@@ -83,7 +88,7 @@ class CreateScreen extends Component {
                       <View style={styles.imageIconRemoveOverlay}>
                         <Icon name="ios-close" size={50} color="white" />
                       </View>
-                      <Image source={{uri: image.uri}} style={styles.imageIcon} />
+                      <Image source={{ uri: image.uri }} style={styles.imageIcon} />
                     </TouchableOpacity>
                   ))
                 }
@@ -100,23 +105,33 @@ class CreateScreen extends Component {
                 position="center" action="takePhoto"
                 handleTap={this.takePhoto}
               />
+              {
 
-              <CameraAction
-                position="right" action="changeCamera"
-                handleTap={this.changeCamera}
-              />
-              
+                <CameraAction
+                  position="right" action="changeCamera"
+                  handleTap={() => {
+                    if (capturedImages.length > 0)
+                      this.props.navigator.push({
+                        screen: 'App.CreateScreen.Upload',
+                      })
+                    else {
+                      Toast.showLongTop('Please, Take some photos first');
+                    }
+                  }}
+                />
+              }
+
             </View>
           </View>
         }
-        
+
       </View>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return {...state.create};
+  return { ...state.create };
 }
 
 function mapActionsToProps(dispatch) {
@@ -126,4 +141,4 @@ function mapActionsToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapActionsToProps) (CreateScreen);
+export default connect(mapStateToProps, mapActionsToProps)(CreateScreen);

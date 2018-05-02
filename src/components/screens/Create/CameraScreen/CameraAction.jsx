@@ -7,7 +7,7 @@ import styles from './CameraStyles';
 const CameraAction = ({action, handleTap, position}) => {
   const iconMapper = {
     changeCamera: {
-      name: 'ios-reverse-camera',
+      name: 'ios-cloud-upload',
       size: 50,
       color: 'rgba(255, 255, 255, 0.6)',
       flex: 1
