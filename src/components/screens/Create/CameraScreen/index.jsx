@@ -11,28 +11,43 @@ import { View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator } fr
 import { addImage, removeImage } from '../../../../reducers/create/create.actions';
 
 class CreateScreen extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showPermissionError: true,
+      wasMounted: false
+    };
+  }
+
   static navigatorStyle = {
     backButtonTitle: '',
     navBarHidden: true
   };
 
-  state = {
-    showPermissionError: true
-  };
-
   async componentWillMount() {
     const isCameraAuthorized = await CameraKitCamera.checkDeviceCameraAuthorizationStatus();
-    console.log(isCameraAuthorized);
     if (!isCameraAuthorized || isCameraAuthorized == -1) {
       const isUserAuthorizedCamera = await CameraKitCamera.requestDeviceCameraAuthorization();
       console.log(isUserAuthorizedCamera);
+    } else {
+      Toast.showLongTop('Please allow Phototype to access your Camera');
     }
-    setTimeout(() => {
-      this.setState(prev => {
-        this.state = prev
-      })
-    }, 3000)
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
+
+  onNavigatorEvent = (event) => {
+    switch(event.id) {
+      case 'willAppear':
+        if (this.state.wasMounted) {
+          this.props.navigator.pop();
+        }
+        break;
+      case 'willDisappear':
+        this.setState({wasMounted: true});
+        break;
+    }
+  };
 
   takePhoto = async () => {
     try {
