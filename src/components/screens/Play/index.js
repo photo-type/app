@@ -9,18 +9,37 @@ import { BUCKET_URL } from '../../../reducers';
 import { createPrototype, getScreens, setCurrentPrototype } from '../../../reducers/create/create.actions';
 
 class PlayScreen extends Component {
+  constructor(props) {
+    super(props);
+
+  }
   static navigatorStyle = {
     backButtonTitle: '',
   };
 
   state = {
     showDialog: false,
-    selectedObj: {}
+    selectedObj: {},
+    images:[],
+    isFirst:true
   };
+  componentWillReceiveProps(props){
+    if(this.state.isFirst && props.screens.data.length){
+    this.setState({
+      images : [...props.screens.data].map((img,index)=>{
+        let temp = img.asMutable();
+        temp.zIndex= index;
+        return temp; 
+      }),
+      isFirst:false
+    })
+  }
+
+  }
   componentDidMount() {
     this.props.getScreens();
-    console.log('Debug this', ...this.props.screens.data)
-    console.log(BUCKET_URL);
+    this.setState({images:[...this.props.screens.data]})
+    console.log("didmount",[...this.props.screens.data])
   }
   handleAction = (obj, index) => {
     if (obj.addButton) {
@@ -30,39 +49,29 @@ class PlayScreen extends Component {
       this.setState({ selectedObj: obj });
     }
   };
+  setImages(){
+    this.setState({
+      images:[...this.props.screens.data]
+    })
+  }
   render() {
+    console.log('this state images',this.state.images);    
+    
+    
     // if (this.props.screens.loading)
     //   return (
     //     <View></View>
     //   );
     const { showDialog } = this.state;
-    let images = [];
     const { create: { loading }, list: { data, loading: listLoading } } = this.props;
     const prototypesList = [{ addButton: true }, ...data];
 
-    images = [...this.props.screens.data];
-    // const rows= images.reduce((rows,item,idx)=>{
-    //   rows.push(...item)
-    //   return rows;
-    // })
-    if(!this.props.screens.loading)
-  {  
-    this.props.screens.loading=true;
-    images = images.map((img,index)=>{
-      let temp = img.asMutable();
-      temp.zIndex= index;
-      console.log('loging actions',img.actions);
-      return temp; 
-    })
-    this.props.screens.loading=false;
-  }
   setScreen = (screenId)=>{
-    console.log("inputed screenid", screenId)
-    images =images.map((img,index)=>{
+    let imgz=[];
+    imgz = this.state.images.map((img,index)=>{
       let temp = img;
       temp.zIndex= index;
-      console.log("screen ids", temp._id)
-      if(temp._id===screenId)
+      if(temp._id==screenId)
         {
           temp.zIndex=999
           console.log('it is TRUE!')
@@ -70,18 +79,17 @@ class PlayScreen extends Component {
       return temp;
     })
     this.setState({
-      state: this.state
-    });
+      images:imgz
+    })
   }
-    console.log('loading', this.props.screens.loading);
-    console.log('console logging images', images);
+
     return (
       <View>
         {
           !this.props.screens.loading &&
           <View style={{ height: '100%', width: '100%', position:'relative' }}>
             {
-              images.map((i, index) => (
+              this.state.images.map((i, index) => (
                 <View style={{ height: '100%', width: '100%' ,position:'absolute',top:0,left:0, zIndex: i.zIndex}}>
                   { 
 
