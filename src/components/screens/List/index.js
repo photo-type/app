@@ -7,10 +7,7 @@ import Prompt from 'react-native-prompt';
 import Toast from '@remobile/react-native-toast';
 import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
 import {createPrototype, listPrototypes, setCurrentPrototype, } from '../../../reducers/create/create.actions';
-<<<<<<< HEAD
-=======
 import {logout} from '../../../reducers/auth/auth.actions';
->>>>>>> b3e0db5a1217ebde68fc6334121fb09053749b6a
 
 class ListScreen extends Component {
   static navigatorStyle = {
