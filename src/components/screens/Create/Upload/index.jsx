@@ -46,6 +46,9 @@ class UploadScreen extends Component {
         console.log('Upload error!', err)
       }
     }
+    //success
+    //send
+    this.props.navigator.pop();
   }
 
   awaitifyUpload = (options, i) => {
