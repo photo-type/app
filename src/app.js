@@ -52,7 +52,16 @@ export default class App {
       Navigation.startSingleScreenApp({
         screen: {
           screen: 'App.ListScreen',
-          title: 'Your Prototypes'
+          title: 'Your Prototypes',
+          navigatorButtons: {
+            rightButtons: [
+              {
+                title: 'Logout', 
+                id: 'logout',
+                disableIconTint: false
+              }
+            ]
+          }
         }
       });
       store.dispatch(appInitialized());
