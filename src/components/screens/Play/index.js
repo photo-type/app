@@ -69,7 +69,9 @@ class PlayScreen extends Component {
         }
       return temp;
     })
-    this.setState();
+    this.setState({
+      state: this.state
+    });
   }
     console.log('loading', this.props.screens.loading);
     console.log('console logging images', images);
