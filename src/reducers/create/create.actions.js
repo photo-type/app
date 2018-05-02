@@ -16,14 +16,12 @@ export const removeImage = (index) => (dispatch) => {
     payload: index
   });
 }
-
 export const setCurrentPrototype = (id) => (dispatch) => {
   return dispatch({
     type: types.SET_PROTOTYPE_ID,
     payload: id
   })
 };
-
 export const getScreens = () => (dispatch, getState) => {
   return dispatch({
     [CALL_API]: {
@@ -37,7 +35,6 @@ export const getScreens = () => (dispatch, getState) => {
     }
   });
 };
-
 export const updateScreen = (id, actions) => (dispatch, getState) => {
   return dispatch({
     [CALL_API]: {
