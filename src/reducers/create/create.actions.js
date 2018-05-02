@@ -10,6 +10,12 @@ export const addImage = (image) => (dispatch) => {
   });
 }
 
+export const resetImages = () => (dispatch) => {
+  return dispatch({
+    type: types.RESET_IMAGES,
+  });
+}
+
 export const removeImage = (index) => (dispatch) => {
   return dispatch({
     type: types.REMOVE_IMAGE,

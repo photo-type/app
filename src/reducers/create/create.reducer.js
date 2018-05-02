@@ -24,6 +24,8 @@ const initialState = Immutable({
 
 export default function create(state = initialState, action = {}) {
   switch (action.type) {
+    case types.RESET_IMAGES:
+      return state.merge({capturedImages: []});
     case types.SET_PROTOTYPE_ID:
       return state.merge({id: action.payload});
     case types.ADD_IMAGE:

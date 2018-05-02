@@ -1,5 +1,6 @@
 const types = {
   ADD_IMAGE: 'create_prototype/ADD_IMAGE',
+  RESET_IMAGES: 'create_prototype/RESET_IMAGES',
   REMOVE_IMAGE: 'create_prototype/REMOVE_IMAGE',
   SET_PROTOTYPE_ID: 'create_prototype/SET_PROTOTYPE_ID',
 

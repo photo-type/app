@@ -7,6 +7,7 @@ import Toast from '@remobile/react-native-toast';
 import {API_URL} from '../../../../reducers';
 import styles from '../CreateStyles';
 import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
+import {resetImages} from '../../../../reducers/create/create.actions';
 
 class UploadScreen extends Component {
   static navigatorStyle = {
@@ -47,7 +48,9 @@ class UploadScreen extends Component {
       }
     }
     //success
-    //send
+    //reset
+    this.props.resetImages();
+    //redirect
     this.props.navigator.pop();
   }
 
@@ -94,8 +97,7 @@ function mapStateToProps(state) {
 
 function mapActionsToProps(dispatch) {
   return {
-    addImage: (image) => dispatch(addImage(image)),
-    removeImage: (index) => dispatch(removeImage(index))
+    resetImages: () => dispatch(resetImages())
   };
 }
 

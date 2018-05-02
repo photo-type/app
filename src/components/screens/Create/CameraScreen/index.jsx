@@ -29,9 +29,9 @@ class CreateScreen extends Component {
     const isCameraAuthorized = await CameraKitCamera.checkDeviceCameraAuthorizationStatus();
     if (!isCameraAuthorized || isCameraAuthorized == -1) {
       const isUserAuthorizedCamera = await CameraKitCamera.requestDeviceCameraAuthorization();
-      console.log(isUserAuthorizedCamera);
-    } else {
-      Toast.showLongTop('Please allow Phototype to access your Camera');
+      if (!isUserAuthorizedCamera) {
+        Toast.showLongTop('Please allow Phototype to access your Camera');
+      }
     }
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
