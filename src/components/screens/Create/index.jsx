@@ -120,7 +120,7 @@ class CreateScreen extends Component {
         }
         {
           images.length > 1 &&
-          <ActionButton
+          <ActionButton 
             label="UPLOAD" handleTap={() => this.props.navigator.push({
             screen: 'App.CreateScreen.Upload',
             })}
