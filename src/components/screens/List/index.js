@@ -25,13 +25,15 @@ class ListScreen extends Component {
   }
 
   onNavigatorEvent = (event) => {
-    console.log(event);
     if (event.type === "NavBarButtonPress" && event.id === 'logout') {
       this.props.logout();
     }
   };
 
   handleCreatePrototype = (name) => {
+    if (name.length > 60) {
+      return Toast.showLongTop('Name should not exceed 60 chars limit.');
+    }
     if (this.props.create.loading) return;
     this.props.createPrototype(name).then((action) => {
       if (!action.error) {
