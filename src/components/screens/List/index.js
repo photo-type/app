@@ -4,8 +4,10 @@ import styles from './ListScreenStyles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActionSheet from 'react-native-actionsheet'
 import Prompt from 'react-native-prompt';
+import Toast from '@remobile/react-native-toast';
 import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
 import {createPrototype, listPrototypes, setCurrentPrototype, } from '../../../reducers/create/create.actions';
+import {logout} from '../../../reducers/auth/auth.actions';
 
 class ListScreen extends Component {
   static navigatorStyle = {
@@ -18,8 +20,16 @@ class ListScreen extends Component {
   };
 
   componentDidMount() {
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
     this.props.listPrototypes();
   }
+
+  onNavigatorEvent = (event) => {
+    console.log(event);
+    if (event.type === "NavBarButtonPress" && event.id === 'logout') {
+      this.props.logout();
+    }
+  };
 
   handleCreatePrototype = (name) => {
     if (this.props.create.loading) return;
@@ -27,7 +37,13 @@ class ListScreen extends Component {
       if (!action.error) {
         this.setState({showDialog: false});
         this.props.listPrototypes();
-      }// Todo show error toast
+      } else {
+        Toast.showLongTop('Error while creating Prototype, Try again.');
+      }
+    })
+    .catch(() => {
+      this.setState({showDialog: false});
+      Toast.showLongTop('Error while creating Prototype, Try again.');
     });
   };
 
@@ -175,7 +191,8 @@ function mapActionsToProps(dispatch) {
   return {
     createPrototype: (s) => dispatch(createPrototype(s)),
     setCurrentPrototype: (s) => dispatch(setCurrentPrototype(s)),
-    listPrototypes: () => dispatch(listPrototypes())
+    listPrototypes: () => dispatch(listPrototypes()),
+    logout: () => dispatch(logout())
   };
 }
 

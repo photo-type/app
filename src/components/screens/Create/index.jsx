@@ -21,8 +21,17 @@ class CreateScreen extends Component {
   };
 
   async componentDidMount() {
-    this.props.getScreens();
+    // this.props.getScreens();
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
+
+  onNavigatorEvent = (event) => {
+    switch(event.id) {
+      case 'willAppear':
+        this.props.getScreens();
+        break;
+    }
+  };
 
   handleAction = (obj, index) => {
     if (obj.addButton) {
