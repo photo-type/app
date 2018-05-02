@@ -19,6 +19,11 @@ const initialState = Immutable({
     success: false,
     loading: false,
     error: false
+  },
+  delete: {
+    success: false,
+    loading: false,
+    error: false
   }
 });
 
@@ -38,6 +43,20 @@ export default function create(state = initialState, action = {}) {
           ind !== action.payload
         ))
       });
+      case types.DELETE_PROTOTYPE_REQUEST:
+      return state.merge({delete: {...state.delete, loading: true}});
+    case types.DELETE_PROTOTYPE_SUCCESS:
+      return state.merge({delete: {error: false, success: true, loading: false}});
+    case types.DELETE_PROTOTYPE_FAILURE:
+      return state.merge({delete: {error: true, success: false, loading: false}});
+
+      case types.CREATE_PROTOTYPE_REQUEST:
+      return state.merge({create: {...state.create, loading: true}});
+    case types.CREATE_PROTOTYPE_SUCCESS:
+      return state.merge({create: {error: false, success: true, loading: false}});
+    case types.CREATE_PROTOTYPE_FAILURE:
+      return state.merge({create: {error: true, success: false, loading: false}});
+
     case types.CREATE_PROTOTYPE_REQUEST:
       return state.merge({create: {...state.create, loading: true}});
     case types.CREATE_PROTOTYPE_SUCCESS:
