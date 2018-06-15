@@ -72,6 +72,25 @@ var styles = StyleSheet.create({
       width: 1,
       height: 1
     },
+  },
+  points: {
+    fontSize: 32,
+    color: '#3d5875'
+  },
+  uploadScreenContainer: {
+    backgroundColor: '#2D2E3A',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 20,
+    paddingRight: 20
+  },
+  uploadScreenText: {
+    fontSize: 24,
+    fontWeight: '300',
+    textAlign: 'center',
+    marginTop: 10,
+    color: 'white'
   }
 });
 

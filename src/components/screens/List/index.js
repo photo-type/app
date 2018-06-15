@@ -31,6 +31,9 @@ class ListScreen extends Component {
   };
 
   handleCreatePrototype = (name) => {
+    if (!name) {
+      return Toast.showLongTop('Name is required.');
+    }
     if (name.length > 60) {
       return Toast.showLongTop('Name should not exceed 60 chars limit.');
     }
@@ -176,7 +179,7 @@ class ListScreen extends Component {
         }
         <Prompt
           title={loading ? 'Processing....' : 'Enter the name of Prototype:'}
-          placeholder="e.g Coffee App"
+          placeholder="e.g Coffee App *"
           defaultValue=""
           visible={ showDialog }
           submitText="Create"

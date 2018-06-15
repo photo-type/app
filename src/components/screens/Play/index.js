@@ -4,123 +4,129 @@ import styles from './PlayScreenStyles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActionSheet from 'react-native-actionsheet'
 import Prompt from 'react-native-prompt';
+import GettingReadyScreen from './GettingReadyScreen';
+import RNFetchBlob from 'react-native-fetch-blob'
 import { View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator } from 'react-native';
 import { BUCKET_URL } from '../../../reducers';
 import { createPrototype, getScreens, setCurrentPrototype } from '../../../reducers/create/create.actions';
 
 class PlayScreen extends Component {
-  constructor(props) {
-    super(props);
-
-  }
   static navigatorStyle = {
     backButtonTitle: '',
+    navBarHidden: true
   };
 
   state = {
-    showDialog: false,
+    loading: true,
+    processed: 0,
     selectedObj: {},
-    images:[],
-    isFirst:true
+    errorLoading: false,
+    base64Data: [],
+    images: [],
   };
-  componentWillReceiveProps(props){
-    if(this.state.isFirst && props.screens.data.length){
-    this.setState({
-      images : [...props.screens.data].map((img,index)=>{
-        let temp = img.asMutable();
-        temp.zIndex= index;
-        return temp; 
-      }),
-      isFirst:false
-    })
-  }
 
-  }
   componentDidMount() {
-    this.props.getScreens();
-    this.setState({images:[...this.props.screens.data]})
-    console.log("didmount",[...this.props.screens.data])
+    this.props.getScreens().then(action => {
+      this.setState({
+        images: [...action.payload.screen].map((img, index) => {
+          img.zIndex = index;
+          return img;
+        })
+      })
+      this.loadImages();
+    });
   }
-  handleAction = (obj, index) => {
-    if (obj.addButton) {
-      this.setState({ showDialog: true });
-    } else {
-      this.ActionSheet.show();
-      this.setState({ selectedObj: obj });
-    }
-  };
-  setImages(){
-    this.setState({
-      images:[...this.props.screens.data]
-    })
-  }
-  render() {
-    console.log('this state images',this.state.images);    
-    
-    
-    // if (this.props.screens.loading)
-    //   return (
-    //     <View></View>
-    //   );
-    const { showDialog } = this.state;
-    const { create: { loading }, list: { data, loading: listLoading } } = this.props;
-    const prototypesList = [{ addButton: true }, ...data];
 
-  setScreen = (screenId)=>{
-    let imgz=[];
-    imgz = this.state.images.map((img,index)=>{
-      let temp = img;
-      temp.zIndex= index;
-      if(temp._id==screenId)
-        {
-          temp.zIndex=999
+  async loadImages() {
+    const images = this.state.images;
+    const base64Data = [];
+    for (let i = 0; i < images.length; i++) {
+      const image = images[i];
+      try {
+        const res = await RNFetchBlob.fetch('GET', `${BUCKET_URL}${image.path}`);
+        if (res.info().status == 200) {
+          base64Data.push(res.base64());
+          console.log(base64Data);
+          this.setState({processed: i + 1});
+        }
+      } catch (e) {
+        console.log(e);
+        return this.setState({errorLoading: true, loading: false});
+      }
+    }
+    this.setState({base64Data, loading: false});
+  }
+
+  render() {
+    const { loading, images, errorLoading, processed, base64Data } = this.state;
+    console.log('this state images', loading);
+    setScreen = (screenId) => {
+      let imgz = [];
+      imgz = this.state.images.map((img, index) => {
+        let temp = img;
+        temp.zIndex = index;
+        if (temp._id == screenId) {
+          temp.zIndex = 999
           console.log('it is TRUE!')
         }
-      return temp;
-    })
-    this.setState({
-      images:imgz
-    })
-  }
+        return temp;
+      })
+      this.setState({
+        images: imgz
+      })
+    }
 
     return (
-      <View>
+      <View style={{flex: 1}}>
         {
-          !this.props.screens.loading &&
-          <View style={{ height: '100%', width: '100%', position:'relative' }}>
+          !loading && !errorLoading &&
+          <View style={{ height: '100%', width: '100%', position: 'relative' }}>
             {
-              this.state.images.map((i, index) => (
-                <View style={{ height: '100%', width: '100%' ,position:'absolute',top:0,left:0, zIndex: i.zIndex}}>
-                  { 
-
+              images.map((i, index) => (
+                <View key={index} style={{ height: '100%', width: '100%', position: 'absolute', top: 0, left: 0, zIndex: i.zIndex }}>
+                  {
                     <View style={{ flex: 1, height: '100%', width: '100%' }}>
-                    {
-                      i.actions.map((a,indx)=>(
-                          <TouchableOpacity onPress={()=>{
-                            setScreen(a.link)
-                          }} style={{position:'absolute',top:a.dimensions.y,left:a.dimensions.x, zIndex:i.zIndex, height:a.dimensions.height,width:a.dimensions.width, backgroundColor:"#00b894",overflow:'hidden',maxWidth:a.dimensions.width, opacity:0.5}}><Text style={{color:'#fff'}}>{a.link}</Text></TouchableOpacity>
-
-                    ))
-                    }
-                      {/* <Text style={{flex:1}} >{index}</Text> */}
-                      <Image style={{ height: '100%', width: '100%'}} source={{ uri: `${BUCKET_URL}${i.path}` }} />
-                      
+                      {
+                        i.actions.map((a, indx) => (
+                          <TouchableOpacity
+                            key={indx} onPress={() => {
+                              setScreen(a.link)
+                            }}
+                            style={{
+                              position: 'absolute', top: a.dimensions.y,
+                              left: a.dimensions.x, zIndex: i.zIndex,
+                              height: a.dimensions.height, width: a.dimensions.width,
+                              backgroundColor: "#00b894", overflow: 'hidden',
+                              maxWidth: a.dimensions.width, opacity: 0.3
+                            }}
+                          >
+                            <Text style={{ color: '#fff' }}></Text>
+                          </TouchableOpacity>
+                        ))
+                      }
+                      <Image
+                        style={{ height: '100%', width: '100%' }}
+                        source={{ uri: `data:image/jpg;base64,${base64Data[index]}` }}
+                      />
                     </View>
                   }
                 </View>
               ))
             }
-            {/* images.forEach(i =>
-            <Image source={{ uri: `${BUCKET_URL}${i.path}` }} />
-            ) */}
           </View>
         }
-        {/* {
-          <View>
-            <Image source={{ uri: `${BUCKET_URL}${images[0].path}` }} />
+        {
+          loading && !errorLoading &&
+          <GettingReadyScreen loaded={parseInt((processed/images.length)*100) || 0} />
+        }
+        {
+          errorLoading &&
+          <View style={styles.uploadScreenContainer}>
+            <Text style={styles.uploadScreenText}>
+              Error occurred while loading screens. Please go back and try again!
+            </Text>
           </View>
-
-        } */}
+        }
       </View>
     );
   }
