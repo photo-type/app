@@ -4318,6 +4318,10 @@ react-native-navigation@^1.1.425:
   version "1.0.0"
   resolved "https://codeload.github.com/hamxabaig/react-native-prompt/tar.gz/332124888bc3ff32ed2bb94f688dc5fcb797a08e"
 
+react-native-safari-view@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-safari-view/-/react-native-safari-view-2.1.0.tgz#1e0cd12c62bce79bc1759c7e281646b08b61c959"
+
 react-native-vector-icons@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.6.0.tgz#e4014311ffa6de397d914ffc31b7097a874cc8d5"

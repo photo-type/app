@@ -90,7 +90,7 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     color: '#2B3857',
     opacity: 0.5,
-    bottom: 25,
+    bottom: -65,
   },
   mgBt: {
     marginBottom: 30,

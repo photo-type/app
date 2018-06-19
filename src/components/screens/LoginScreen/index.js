@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styles from './LoginScreenStyles';
+import SafariView from 'react-native-safari-view';
 import { TextField } from 'react-native-material-textfield';
 import {View, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator} from 'react-native';
 import {login}  from '../../../reducers/auth/auth.actions';
@@ -99,7 +100,13 @@ class LoginScreen extends Component {
             >
               <Text style={styles.forgotPasswordText}>Dont have an account?</Text>
             </TouchableOpacity>
-            <Text style={styles.forgotPasswordText1}>Forgot your password?</Text>
+            <TouchableOpacity
+              onPress={() => SafariView.show({
+              url: 'http://phototype.me/reset-password'
+              })}
+            >
+              <Text style={styles.forgotPasswordText1}>Forgot your password?</Text>
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.logoWrap}>
