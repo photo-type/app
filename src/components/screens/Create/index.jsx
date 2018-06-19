@@ -127,14 +127,6 @@ class CreateScreen extends Component {
           this.props.screens.loading &&
           <ActivityIndicator style={{marginTop: 50}} size="large" />
         }
-        {
-          images.length > 1 &&
-          <ActionButton 
-            label="UPLOAD" handleTap={() => this.props.navigator.push({
-            screen: 'App.CreateScreen.Upload',
-            })}
-          />
-        }
       </View>
     );
   }

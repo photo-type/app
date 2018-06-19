@@ -52,7 +52,7 @@ class CreateScreen extends Component {
   takePhoto = async () => {
     try {
       const image = await this.camera.capture(true);
-      const compressedImage = await ImageResizer.createResizedImage(image.uri, image.width, image.height, 'JPEG', 80);
+      const compressedImage = await ImageResizer.createResizedImage(image.uri, image.width, image.height, 'JPEG', 65);
       console.log(compressedImage);
       this.props.addImage(compressedImage);
     } catch (e) {
